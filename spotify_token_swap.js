@@ -15,7 +15,7 @@ var SPOTIFY_ACCOUNTS_ENDPOINT = "https://accounts.spotify.com";
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/swap", function (req, res) {
-    if (!req.body || !req.body.hasOwnProperty("auth_code")) {
+    if (!req.body || !req.body.hasOwnProperty("code")) {
         res.status(550).send("Permission Denied");
         return;
     }
@@ -23,7 +23,7 @@ app.post("/swap", function (req, res) {
     var form_data = {
         "grant_type": "authorization_code",
         "redirect_uri": CLIENT_CALLBACK_URL,
-        "code": req.body.auth_code
+        "code": req.body.code
     };
 
     request.post({
