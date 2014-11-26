@@ -54,11 +54,11 @@ app.post("/swap", function (req, res) {
         debug("swap: refresh_token: %s", token_data.refresh_token);
         debug("swap: encrypted_token: %s", encrypted_token);
 
-        res.send({
-            "refresh_token": encrypted_token
-        }, {
+        res.status(200).set({
             "Content-Type": "application/json"
-        }, 200);
+        }).send({
+            "refresh_token": encrypted_token
+        });
     });
 });
 
