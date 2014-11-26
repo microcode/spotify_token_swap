@@ -1,0 +1,7 @@
+{
+    "client_id": "e6695c6d22214e0f832006889566df9c",
+    "client_secret": "29eb02041ba646179a1189dccac112c7",
+    "encryption_secret": "cFJLyifeUJUBFWdHzVbykfDmPHtLKLGzViHW9aHGmyTLD8hGXC",
+    "callback_url": "spotifyiossdkexample://",
+    "endpoint": "https://accounts.spotify.com"
+}
