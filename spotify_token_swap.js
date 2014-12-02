@@ -48,17 +48,11 @@ app.post("/swap", function (req, res) {
 
         var token_data = JSON.parse(body);
 
-        var cipher = crypto.createCipher("DES-EDE3-CBC", config.encryption_secret);
-        var encrypted_token = Buffer.concat([cipher.update(token_data.refresh_token), cipher.final()]).toString("base64");
-
-        debug("swap: refresh_token: %s", token_data.refresh_token);
-        debug("swap: encrypted_token: %s", encrypted_token);
+	debug("swap: token_data:", token_data);
 
         res.status(200).set({
             "Content-Type": "application/json"
-        }).send({
-            "refresh_token": encrypted_token
-        });
+        }).send(token_data);
     });
 });
 
@@ -70,10 +64,8 @@ app.post("/refresh", function (req, res) {
 
     var encrypted_token = new Buffer(req.body.refresh_token, 'base64');
 
-    var decipher = crypto.createDecipher("DES-EDE3-CBC", config.encryption_secret);
-    var refresh_token = Buffer.concat([decipher.update(encrypted_token), decipher.final()]).toString();
+    var refresh_token = req.body.refresh_token;
 
-    debug("refresh: encrypted_token: %s", req.body.refresh_token);
     debug("refresh: refresh_token: %s", refresh_token);
 
     var form_data = {
